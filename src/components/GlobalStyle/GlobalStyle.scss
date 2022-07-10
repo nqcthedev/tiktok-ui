@@ -2,14 +2,15 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@200;300;400;500;600;700&display=swap');
 :root {
     --primary: rgba(254, 44, 85, 1);
-
+    --black: black;
+    --text-color: #333;
     //scss
-    --default-layout-header-height:60px;
-    --default-layout-width:1150px;
+    --default-layout-header-height: 60px;
+    --default-layout-width: 1150px;
 }
 * {
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 html {
@@ -21,4 +22,15 @@ body {
     line-hight: 1.5;
     font-size: 1.6rem;
     text-rendering: optimizespeed;
+}
+
+button,
+input,
+[tabindex] {
+    outline: none;
+    border: none;
+}
+a[href] {
+    color: var(--text-color);
+    text-decoration: none;
 }
