@@ -1,13 +1,17 @@
 .wrapper {
-    font-size: 1.6rem;
-    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     min-width: 100px;
     padding: 9px 16px;
     border-radius: 4px;
+    font-size: 1.6rem;
+    font-weight: 700;
     cursor: pointer;
     background-color: var(--white);
     border: 1px solid transparent;
     user-select: none;
+
     + .wrapper {
         margin-left: 8px;
     }
@@ -16,6 +20,17 @@
         pointer-events: none;
         opacity: 0.5;
     }
+}
+
+.icon + .title,
+.title + .icon {
+    margin-left: 8px;
+}
+
+.icon {
+    width: 24px;
+    display: inline-block;
+    text-align: center;
 }
 
 //Button type

@@ -17,6 +17,8 @@ const Button = ({
     className,
     children,
     onClick,
+    leftIcon,
+    rightIcon,
     ...passProps
 }) => {
     let Comp = 'button';
@@ -51,7 +53,9 @@ const Button = ({
     });
     return (
         <Comp className={classes} {...props}>
-            <span>{children}</span>
+            {leftIcon && <span className={cx('icon')}>{leftIcon}</span>}
+            <span className={cx('title')}>{children}</span>
+            {rightIcon && <span className={cx('icon')}>{rightIcon}</span>}
         </Comp>
     );
 };
