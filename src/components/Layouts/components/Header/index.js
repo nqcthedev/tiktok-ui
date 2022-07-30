@@ -3,27 +3,32 @@ import 'tippy.js/dist/tippy.css'; // optional
 import React, { useEffect, useState } from 'react';
 import {
     faCircleQuestion,
+    faCircleUser,
     faCircleXmark,
     faCloudUpload,
+    faCoins,
     faEarthAsia,
     faEllipsisVertical,
+    faGear,
     faKeyboard,
     faMessage,
     faSearch,
+    faSignOut,
     faSpinner,
 } from '@fortawesome/free-solid-svg-icons';
 
 import AccountItem from '~/components/AccountItem';
 import Button from '~/components/Button';
-//Icon
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Menu from '~/components/Popper/Menu';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
-import TippyHeadless from '@tippyjs/react/headless';
 import Tippy from '@tippyjs/react';
+import TippyHeadless from '@tippyjs/react/headless';
 import className from 'classnames/bind';
 import images from '~/assets/images';
 import styles from './Header.module.scss';
-import Menu from '~/components/Popper/Menu';
+
+//Icon
 
 const cx = className.bind(styles);
 const currentUser = true;
@@ -73,6 +78,31 @@ const Header = () => {
             default:
         }
     };
+
+    const userMenu = [
+        // {
+        //     icon: <FontAwesomeIcon icon={faCircleUser} />,
+        //     title: 'View Profile',
+        //     to: '/@hoaaa',
+        // },
+        {
+            icon: <FontAwesomeIcon icon={faCoins} />,
+            title: 'Get Coins',
+            to: '/coins',
+        },
+        {
+            icon: <FontAwesomeIcon icon={faGear} />,
+            title: 'Settings',
+            to: '/settings',
+        },
+        ...MENU_ITEMS,
+        {
+            icon: <FontAwesomeIcon icon={faSignOut} />,
+            title: 'Logout',
+            to: '/logout',
+            separate: true,
+        },
+    ];
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
@@ -109,7 +139,7 @@ const Header = () => {
                 <div className={cx('actions')}>
                     {currentUser ? (
                         <>
-                            <Tippy content="Upload video" placement="bottom">
+                            <Tippy visible="" content="Upload video" placement="bottom">
                                 <button className={cx('action-btn')}>
                                     <FontAwesomeIcon icon={faCloudUpload} />
                                 </button>
@@ -121,7 +151,7 @@ const Header = () => {
                             <Button primary>Login</Button>
                         </>
                     )}
-                    <Menu items={MENU_ITEMS} onChange={handleMenuChange}>
+                    <Menu items={currentUser ? userMenu : MENU_ITEMS} onChange={handleMenuChange}>
                         {currentUser ? (
                             <img
                                 src="https://scontent-hkg4-1.xx.fbcdn.net/v/t1.6435-9/156686482_2824242284460906_6765100400937334664_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=IzuNH9gPqX4AX90ld1C&_nc_ht=scontent-hkg4-1.xx&oh=00_AT-7O8WW3azZ2yJ1cjrCUiE_e0fzRhqOg0WQ7gjdtnOoiA&oe=62FE2FA2"
