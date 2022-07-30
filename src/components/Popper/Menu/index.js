@@ -35,7 +35,6 @@ const Menu = ({ children, items = [], onChange = defaultFn }) => {
             interactive={true}
             delay={[0, 700]}
             offset={[12, 8]}
-            visible
             placement="bottom-end"
             render={(attrs) => (
                 <div className={cx('menu-list')} tabIndex="-1" {...attrs}>
