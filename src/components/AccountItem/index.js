@@ -14,7 +14,7 @@ const AccountItem = ({ data }) => {
             <div className={cx('info')}>
                 <h4 className={cx('name')}>
                     <span>{data.full_name}</span>
-                    <FontAwesomeIcon className={cx('check')} icon={faCheckCircle} />
+                    {data.tick && <FontAwesomeIcon className={cx('check')} icon={faCheckCircle} />}
                 </h4>
                 <span className={cx('username')}>{data.nickname}</span>
             </div>

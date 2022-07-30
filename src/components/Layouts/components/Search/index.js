@@ -7,6 +7,7 @@ import { Wrapper as PopperWrapper } from '~/components/Popper';
 import TippyHeadless from '@tippyjs/react/headless';
 import className from 'classnames/bind';
 import styles from './Search.module.scss';
+import { useDebounce } from '~/hooks';
 
 const cx = className.bind(styles);
 const Search = () => {
@@ -15,9 +16,9 @@ const Search = () => {
     const [showResult, setShowResult] = useState(true);
     const [loading, setLoading] = useState(false);
     const inputRef = useRef();
-
+    const debounced = useDebounce(searchValue, 500);
     useEffect(() => {
-        if (!searchValue.trim()) {
+        if (!debounced.trim()) {
             setSearchResult([]);
             return;
         }
@@ -25,7 +26,7 @@ const Search = () => {
         const fetchData = async () => {
             try {
                 const res = await fetch(
-                    `https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(searchValue)}&type=less`,
+                    `https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(debounced)}&type=less`,
                 );
                 const resData = await res.json();
                 setSearchResult(resData.data);
@@ -35,7 +36,7 @@ const Search = () => {
             }
         };
         fetchData();
-    }, [searchValue]);
+    }, [debounced]);
 
     const handleClear = () => {
         setSearchValue('');
