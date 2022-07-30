@@ -1,31 +1,24 @@
 import 'tippy.js/dist/tippy.css'; // optional
 
 import { InboxIcon, MessageIcon, UploadIcon } from '~/components/Icons';
-import React, { useEffect, useState } from 'react';
 import {
     faCircleQuestion,
     faCircleUser,
-    faCircleXmark,
-    faCloudUpload,
     faCoins,
     faEarthAsia,
     faEllipsisVertical,
     faGear,
     faKeyboard,
-    faMessage,
-    faSearch,
     faSignOut,
-    faSpinner,
 } from '@fortawesome/free-solid-svg-icons';
 
-import AccountItem from '~/components/AccountItem';
 import Button from '~/components/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Image from '~/components/Image';
 import Menu from '~/components/Popper/Menu';
-import { Wrapper as PopperWrapper } from '~/components/Popper';
+import React from 'react';
+import Search from '../Search';
 import Tippy from '@tippyjs/react';
-import TippyHeadless from '@tippyjs/react/headless';
 import className from 'classnames/bind';
 import images from '~/assets/images';
 import styles from './Header.module.scss';
@@ -65,13 +58,6 @@ const MENU_ITEMS = [
     },
 ];
 const Header = () => {
-    const [searchResult, setSearchResult] = useState([]);
-    useEffect(() => {
-        setTimeout(() => {
-            setSearchResult([]);
-        }, 0);
-    }, []);
-
     const handleMenuChange = (menuItem) => {
         console.log('change:', menuItem);
         switch (menuItem.type) {
@@ -82,11 +68,11 @@ const Header = () => {
     };
 
     const userMenu = [
-        // {
-        //     icon: <FontAwesomeIcon icon={faCircleUser} />,
-        //     title: 'View Profile',
-        //     to: '/@hoaaa',
-        // },
+        {
+            icon: <FontAwesomeIcon icon={faCircleUser} />,
+            title: 'View Profile',
+            to: '/@hoaaa',
+        },
         {
             icon: <FontAwesomeIcon icon={faCoins} />,
             title: 'Get Coins',
@@ -110,34 +96,9 @@ const Header = () => {
             <div className={cx('inner')}>
                 <img src={images.logo.default} alt="logo" />
 
-                <TippyHeadless
-                    interactive={true}
-                    visible={searchResult.length > 0}
-                    render={(attrs) => (
-                        <div className={cx('search-result')} tabIndex="-1" {...attrs}>
-                            <PopperWrapper>
-                                <h4 className={cx('search-title')}>Account</h4>
-                                <AccountItem />
-                                <AccountItem />
-                                <AccountItem />
-                                <AccountItem />
-                            </PopperWrapper>
-                        </div>
-                    )}
-                >
-                    <div className={cx('search')}>
-                        <input placeholder="Search accounts and videos" spellCheck={false} />
-                        <button className={cx('clear')}>
-                            <FontAwesomeIcon icon={faCircleXmark} />
-                        </button>
-                        {/* Loading */}
-                        <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />
+                {/* Search */}
 
-                        <button className={cx('search-btn')}>
-                            <FontAwesomeIcon icon={faSearch} />
-                        </button>
-                    </div>
-                </TippyHeadless>
+                <Search />
                 <div className={cx('actions')}>
                     {currentUser ? (
                         <>
